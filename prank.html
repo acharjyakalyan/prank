@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virus Alert!</title>
+    <style>
+        body {
+            background: red;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .warning {
+            font-size: 28px;
+            font-weight: bold;
+            animation: blink 0.8s infinite alternate;
+        }
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .popup {
+            background: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+        }
+        button {
+            background: yellow;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="warning">⚠️ WARNING: VIRUS DETECTED! ⚠️</h1>
+    <p>Your phone is infected! Immediate action is required!</p>
+
+    <div class="popup">
+        <p>Enter the secret code to fix your phone:</p>
+        <input type="text" id="password" placeholder="Enter Code Here">
+        <button onclick="checkPassword()">Fix Now</button>
+    </div>
+
+    <script>
+        function playSound() {
+            let audio = new Audio('https://www.soundjay.com/button/beep-07.wav');
+            audio.loop = true;
+            audio.play();
+        }
+
+        function vibratePhone() {
+            if (navigator.vibrate) {
+                navigator.vibrate([500, 200, 500, 200]);
+            }
+        }
+
+        function preventClose() {
+            window.onbeforeunload = function() {
+                return "Your phone is still infected! Are you sure you want to leave?";
+            };
+        }
+
+        function checkPassword() {
+            let password = document.getElementById("password").value;
+            if (password === "I am an April Fool") {
+                alert("😂 You got pranked! No virus here!");
+                window.location.href = "https://www.google.com"; // Redirects to a harmless site
+            } else {
+                alert("❌ Wrong Password! Virus Spreading! ☠️");
+                document.body.style.background = "black";
+                document.querySelector(".warning").innerText = "SYSTEM FAILURE!";
+            }
+        }
+
+        playSound();
+        vibratePhone();
+        preventClose();
+    </script>
+</body>
+</html>
